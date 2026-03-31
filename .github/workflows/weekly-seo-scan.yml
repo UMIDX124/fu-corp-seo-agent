@@ -1,0 +1,62 @@
+name: Weekly SEO Scan — All Sites
+
+on:
+  schedule:
+    # Every Monday at 9:00 AM PKT (4:00 AM UTC)
+    - cron: '0 4 * * 1'
+  workflow_dispatch: # Manual trigger button
+
+jobs:
+  scan-vcs:
+    name: Scan — Virtual Customer Solution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Run SEO Scan
+        run: npx tsx src/index.ts scan --url https://virtualcustomersolution.com --max-pages 100 --depth 3 --output ./reports/vcs
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-report-vcs-${{ github.run_number }}
+          path: ./reports/vcs/
+          retention-days: 90
+
+  scan-digitalpoint:
+    name: Scan — Digital Point LLC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Run SEO Scan
+        run: npx tsx src/index.ts scan --url https://www.digitalpointllc.com --max-pages 100 --depth 3 --output ./reports/digitalpoint
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-report-digitalpoint-${{ github.run_number }}
+          path: ./reports/digitalpoint/
+          retention-days: 90
+
+  scan-backup:
+    name: Scan — Backup Solutions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Run SEO Scan
+        run: npx tsx src/index.ts scan --url https://backup-solutions.vercel.app --max-pages 100 --depth 3 --output ./reports/backup
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-report-backup-${{ github.run_number }}
+          path: ./reports/backup/
+          retention-days: 90

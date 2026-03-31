@@ -1,0 +1,30 @@
+{
+  "name": "seo-agent",
+  "version": "1.0.0",
+  "description": "AI-powered SEO scanner, analyzer, and fixer for Next.js websites",
+  "type": "module",
+  "bin": {
+    "seo-agent": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "scan": "tsx src/index.ts scan",
+    "fix": "tsx src/index.ts fix"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@types/node-cron": "^3.0.11",
+    "cheerio": "^1.0.0",
+    "commander": "^13.1.0",
+    "dotenv": "^16.4.7",
+    "glob": "^11.0.1",
+    "node-cron": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
